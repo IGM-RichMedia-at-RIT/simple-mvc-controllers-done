@@ -48,7 +48,7 @@ app.use('/assets', express.static(path.resolve(`${__dirname}/../client/`)));
    The compression plugin will attempt to compress all outgoing traffic from our server. This means our server
    should have faster response times because the packages it sends to the client through the internet are
    as small as possible. With just the following line of code, all our responses will automatically be compressed
-   if possible. The browser knows how to uncompress these responses.  
+   if possible. The browser knows how to uncompress these responses.
 */
 app.use(compression());
 
@@ -60,11 +60,11 @@ app.use(compression());
    bodyParser.json(), which parse other formats (like json). https://www.npmjs.com/package/body-parser
 
    When our app recieves a request with query params or a body, the bodyParse library will automatically
-   take that information and store it in req.body or req.query. Additionally it's extended: true option 
+   take that information and store it in req.body or req.query. Additionally it's extended: true option
    makes it convert types (since by default everything would be a string). We do not need to do anything
    additional to get this to work.
 */
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /* We also make use of the serve-favicon library. https://www.npmjs.com/package/serve-favicon. This
    library handles all of the annoying favicon requests that the browser will make over and over again.
@@ -82,9 +82,9 @@ router(app);
 
 /* Once our app has been configured and our routes have been added by our router function, we can
    start up our application. We simply tell it to listen to our port, and then either throw an error
-   if it fails or print out that we are listening on that port. 
+   if it fails or print out that we are listening on that port.
 */
 app.listen(port, (err) => {
-    if(err) { throw err; }
-    console.log(`Listening on port ${port}`);
-})
+  if (err) { throw err; }
+  console.log(`Listening on port ${port}`);
+});

@@ -27,22 +27,16 @@ let name = 'unknown';
 
    Functions like res.sendFile() are convenience functions built into the response
    by express. They work similarly to our own respond() function from previous demos.
-   They will properly read in the given file, set the headers (including the 
+   They will properly read in the given file, set the headers (including the
    content-type based on the extension), write the response body, and send the response.
 */
-const hostIndex = (req, res) => {
-  return res.sendFile(path.resolve(`${__dirname}/../../views/index.html`));
-};
+const hostIndex = (req, res) => res.sendFile(path.resolve(`${__dirname}/../../views/index.html`));
 
 // Same thing as hostIndex but for a different html page.
-const hostPage1 = (req, res) => {
-  return res.sendFile(path.resolve(`${__dirname}/../../views/page1.html`));
-};
+const hostPage1 = (req, res) => res.sendFile(path.resolve(`${__dirname}/../../views/page1.html`));
 
 // Same thing as hostIndex but for a different html page.
-const hostPage2 = (req, res) => {
-  return res.sendFile(path.resolve(`${__dirname}/../../views/page2.html`));
-};
+const hostPage2 = (req, res) => res.sendFile(path.resolve(`${__dirname}/../../views/page2.html`));
 
 /* Here we see another feature of express response functions. They can be chained together.
    For example, here we want to send back the notFound.html page with a 404 status code.
@@ -53,9 +47,7 @@ const hostPage2 = (req, res) => {
    res.status() is not a terminating function, meaning it does not immediately send the response.
    res.sendFile() is, however, a terminating function and it will send the response.
 */
-const notFound = (req, res) => {
-  return res.status(404).sendFile(path.resolve(`${__dirname}/../../views/notFound.html`));
-};
+const notFound = (req, res) => res.status(404).sendFile(path.resolve(`${__dirname}/../../views/notFound.html`));
 
 /* Especially when making a data API, many of our handler functions won't send back a file.
    Instead, we want to send back a json object or other type of data. Here we see an example
@@ -63,13 +55,10 @@ const notFound = (req, res) => {
    to the user as json including setting the content-type header to 'application/json',
    stringifying our object, putting it in the response body, and sending the response back.
 */
-const getName = (req, res) => {
-  return res.json({name});
-}
+const getName = (req, res) => res.json({ name });
 
 // Below is an example of a POST request handler for setName.
 const setName = (req, res) => {
-
   /* First, we can see that req.body contains the firstname and lastname sent by the client.
      In the past, we would have had to parse this information out for ourselves but the
      bodyParser plugin that we added in app.js has automatically parsed the body and placed
@@ -81,10 +70,10 @@ const setName = (req, res) => {
      there. If we don't have it, send back a 400 status code with an error message. Otherwise
      we will continue on.
   */
-  if(!req.body.firstname || !req.body.lastname) {
+  if (!req.body.firstname || !req.body.lastname) {
     return res.status(400).json({
-      error: 'firstname and lastname are both required', 
-      id: 'setNameMissingParams'
+      error: 'firstname and lastname are both required',
+      id: 'setNameMissingParams',
     });
   }
 
@@ -92,8 +81,8 @@ const setName = (req, res) => {
   name = `${req.body.firstname} ${req.body.lastname}`;
 
   // And then return it to the user
-  return res.json({name});
-}
+  return res.json({ name });
+};
 
 // Export our handler functions
 module.exports = {
