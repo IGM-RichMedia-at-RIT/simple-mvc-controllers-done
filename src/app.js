@@ -10,7 +10,6 @@ const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const favicon = require('serve-favicon');
-const bodyParser = require('body-parser');
 
 // Import our "router" function from our router.js file.
 const router = require('./router.js');
@@ -55,20 +54,20 @@ app.use('/assets', express.static(path.resolve(`${__dirname}/../client/`)));
 */
 app.use(compression());
 
-/* The next plugin we use is called bodyParser. In the past, we had to write a number of async
-   event handlers and functions to turn a POST request body or GET request query params into
-   a usable object. The bodyParser library automatically does this work for us.
+/* The next plugin we use is the express URLencoded middleware. In the past, we had to write 
+   a number of async event handlers and functions to turn a POST request body or GET request 
+   query params into a usable object. The express URLEncoded middleware  automatically 
+   does this work for us.
 
    This specific line parses data in the x-www-form-urlencoded format. There are also
-   functions like bodyParser.json(), which parse other formats (like json).
-   https://www.npmjs.com/package/body-parser
+   functions like express.json(), which parse other formats (like json).
 
-   When our app recieves a request with query params or a body, the bodyParse library will
+   When our app recieves a request with query params or a body, this middleware will
    automatically take that information and store it in req.body or req.query. Additionally
    it's extended: true option makes it convert types (since by default everything would be
    a string). We do not need to do anything additional to get this to work.
 */
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 /* We also make use of the serve-favicon library. https://www.npmjs.com/package/serve-favicon.
    This library handles all of the annoying favicon requests that the browser will make over

@@ -45,7 +45,7 @@ const router = (app) => {
        urls above. If none of them match, everything will match with this. Think of it
        as our "fallback" or "default" statement. We will route everything else to our notFound.
     */
-  app.get('/*', controllers.notFound);
+  app.get('/*wild', controllers.notFound);
 
   /* All the handlers above are for GET requests, but the following handler is for POST
        requests to /setName. While the comment above mentions that the requests are checked

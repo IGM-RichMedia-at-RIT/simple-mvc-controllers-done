@@ -61,8 +61,8 @@ const getName = (req, res) => res.json({ name });
 const setName = (req, res) => {
   /* First, we can see that req.body contains the firstname and lastname sent by the client.
      In the past, we would have had to parse this information out for ourselves but the
-     bodyParser plugin that we added in app.js has automatically parsed the body and placed
-     it in req.body for us before this function has even been called.
+     express.urlencoded() middleware that we added in app.js has automatically parsed the body 
+     and placed it in req.body for us before this function has even been called.
   */
   console.dir(req.body);
 
